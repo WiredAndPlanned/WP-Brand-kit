@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WiredAndPlanned Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@500;600&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a planner-style shell. Sticky top bar, numbered index on the left (a tab strip on phones),
+   one reading column of chapters on cream paper. The kit wears the brand's own ink. */
+:root{
+  --page:#FAF5EC; --paper:#FFFDF9; --field:#FCF9F3; --line:#F3EDE2; --sand:#EBE1D1;
+  --muted:#8F8574; --ink2:#6A6152; --ink:#26211C;
+  --tile:#26211C; --stone:#FCFAF5; --ring:rgba(38,33,28,0);
+  --glass:rgba(255,253,249,.88);
+  --shadow:0 10px 30px rgba(70,44,26,.09); --shadow-sm:0 3px 12px rgba(70,44,26,.07);
+  --sans:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --r-card:22px; --r-btn:12px; --r-field:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#1E1C18; --paper:#26231E; --field:#242019; --line:#39332B; --sand:#3B352C;
+    --muted:#ABA291; --ink2:#CCC4B3; --ink:#F7F3EC;
+    --tile:#F7F3EC; --stone:#26211C; --ring:rgba(242,237,228,.12);
+    --glass:rgba(30,28,24,.88);
+    --shadow:0 14px 34px rgba(0,0,0,.36); --shadow-sm:0 4px 14px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#1E1C18; --paper:#26231E; --field:#242019; --line:#39332B; --sand:#3B352C;
+  --muted:#ABA291; --ink2:#CCC4B3; --ink:#F7F3EC;
+  --tile:#F7F3EC; --stone:#26211C; --ring:rgba(242,237,228,.12);
+  --glass:rgba(30,28,24,.88);
+  --shadow:0 14px 34px rgba(0,0,0,.36); --shadow-sm:0 4px 14px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 132px)}
+@media (min-width:1000px){html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;align-items:center;gap:14px;height:64px;padding:0 clamp(16px,3vw,28px);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;min-width:0;text-decoration:none;color:inherit}
+.brand .t{display:flex;flex-direction:column;line-height:1.05;min-width:0}
+.brand .t b{font-weight:500;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
+.brand .t span{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.22em;color:var(--muted);margin-top:3px;white-space:nowrap}
+.spacer{flex:1}
+.seg{display:flex;padding:3px;border-radius:999px;background:var(--paper);border:1px solid var(--line);flex:none}
+.seg button{height:30px;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--page)}
+@media (max-width:420px){.seg button{padding:0 9px}.brand .t span{display:none}}
+
+/* ---------- shell ---------- */
+.strip{position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:40;display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip a{flex:none;display:flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);font-size:13px;font-weight:500;text-decoration:none;white-space:nowrap}
+.strip a span{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.strip a.on{background:var(--ink);border-color:var(--ink);color:var(--page)}
+.strip a.on span{color:var(--page);opacity:.7}
+.shell{display:flex;align-items:flex-start;max-width:1320px;margin:0 auto}
+.index{display:none}
+@media (min-width:1000px){
+  .strip{display:none}
+  .index{display:flex;flex-direction:column;gap:2px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);width:228px;flex:none;height:calc(100vh - 64px);overflow-y:auto;padding:26px 14px 24px 18px;border-right:1px solid var(--line)}
+  .index a{position:relative;display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border-radius:12px;color:var(--ink2);text-decoration:none;font-size:14.5px;font-weight:500}
+  .index a span{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--muted);min-width:20px}
+  .index a:hover{background:var(--paper)}
+  .index a.on{background:var(--paper);color:var(--ink);font-weight:700;box-shadow:var(--shadow-sm)}
+  .index a.on::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--ink)}
+  .index .foot{margin-top:auto;padding:18px 12px 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;line-height:1.8;color:var(--muted)}
+}
+main{flex:1;min-width:0;padding:clamp(22px,4vw,48px) clamp(16px,4vw,52px) 80px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(56px,8vw,96px)}
+section{display:flex;flex-direction:column;gap:22px}
+.head{display:flex;flex-direction:column;gap:8px;max-width:66ch}
+.head h2{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.05}
+.head p{font-size:16px;color:var(--ink2);line-height:1.6}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.note{font-size:13.5px;color:var(--ink2);line-height:1.55}
+.note b{color:var(--ink);font-weight:600}
+
+/* ---------- hero ---------- */
+.hero{display:flex;flex-direction:column;gap:22px}
+.hero-top{display:flex;align-items:center;gap:clamp(16px,3vw,28px);flex-wrap:wrap}
+.hero h1{font-size:clamp(36px,6.4vw,64px);font-weight:800;line-height:.98;letter-spacing:-.025em;max-width:13ch}
+.hero .lead{font-size:clamp(16px,1.7vw,18px);color:var(--ink2);line-height:1.6;max-width:62ch}
+.family{display:flex;flex-wrap:wrap;gap:10px;padding:18px;border-radius:var(--r-card);background:var(--paper);border:1px solid var(--line)}
+.family .ft{display:block;flex:none}
+.family-cap{font-size:13px;color:var(--muted);margin-top:-10px}
+
+/* tiles */
+.tile{display:block;flex:none;border-radius:24%;box-shadow:0 0 0 1px var(--ring)}
+.mk{display:block;flex:none}
+.mk svg{display:block;width:100%;height:100%}
+.quote{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.6vw,26px);line-height:1.38;max-width:48ch}
+.quote-src{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.where{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.apps{display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,28px);align-items:flex-end;padding:22px}
+.app{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.app .label{letter-spacing:.1em}
+.sizeclear{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.sizeclear{grid-template-columns:1fr}}
+.scale-row{display:flex;align-items:flex-end;gap:clamp(16px,4vw,36px);flex-wrap:wrap}
+.scale-row .sz{display:flex;flex-direction:column;align-items:center;gap:8px}
+.clearbox{display:inline-flex;padding:30px;border:1.5px dashed var(--sand);border-radius:6px;background:var(--field)}
+.motion{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;padding:clamp(18px,3vw,26px)}
+@media (max-width:560px){.motion{grid-template-columns:1fr}}
+.motion .stage{width:160px;aspect-ratio:1;max-width:100%}
+@keyframes settle{0%{transform:translateY(7px) scaleY(.7);opacity:0}60%{opacity:1}100%{transform:none;opacity:1}}
+.settle rect{transform-box:fill-box;transform-origin:50% 100%}
+.settle.go rect{animation:settle .45s cubic-bezier(.2,.8,.2,1) both}
+.settle.go rect:nth-child(2){animation-delay:.09s}
+.settle.go rect:nth-child(1){animation-delay:.18s}
+.tile svg{display:block;width:100%;height:100%}
+
+/* ---------- brand basics ---------- */
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.name{padding:20px;display:flex;flex-direction:column;gap:10px}
+.name .show{min-height:46px;display:flex;align-items:center}
+.traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.traits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.traits{grid-template-columns:1fr}}
+.trait{padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:var(--field)}
+.trait b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.trait span{display:block;font-size:13.5px;color:var(--ink2);margin-top:4px;line-height:1.45}
+
+/* ---------- cairn ---------- */
+.marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px}
+.markbox{display:flex;flex-direction:column;gap:12px;padding:18px}
+.stage{aspect-ratio:4/3;max-width:100%;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--field);border:1px solid var(--line)}
+.build-wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;padding:clamp(16px,3vw,26px);align-items:center}
+@media (max-width:760px){.build-wrap{grid-template-columns:1fr}}
+.build{width:100%;height:auto;display:block}
+.build .gridl{stroke:var(--line);stroke-width:.04}
+.build .gridm{stroke:var(--sand);stroke-width:.06}
+.build .box{fill:none;stroke:var(--muted);stroke-width:.08;stroke-dasharray:.4 .3}
+.build .st{fill:var(--ink)}
+.build .lead-l{stroke:var(--muted);stroke-width:.06}
+.build text{fill:var(--ink2);font-family:var(--mono);font-size:1.15px}
+.build .dim{fill:var(--muted);font-size:.95px}
+.specs{display:flex;flex-direction:column;gap:0}
+.specs div{display:flex;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45}
+.specs div:first-child{border-top:0}
+.specs dt,.specs .k{flex:none;width:92px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:var(--r-btn);background:var(--ink);color:var(--page);font-weight:600;font-size:14px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{opacity:.88}
+.lockups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.lock{padding:20px;display:flex;flex-direction:column;gap:14px}
+.lock .stage{aspect-ratio:auto;min-height:150px;padding:22px}
+.lk{display:flex;align-items:center;gap:12px}
+.lk .t{display:flex;flex-direction:column;line-height:1.05}
+.lk .t b{font-weight:700;font-size:17px;letter-spacing:-.01em}
+.lk .t span{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.2em;color:var(--muted);margin-top:4px}
+.lk.stack{flex-direction:column;text-align:center;gap:10px}
+.lk.stack .t{align-items:center}
+.lk.brandlk .t b{font-size:24px;font-weight:500;letter-spacing:-.02em}
+.lk.stack.brandlk{gap:14px}
+.lk.stack.brandlk .t b{font-size:22px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.rule{padding:18px 20px}
+.rule ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.rule li{position:relative;padding-left:22px;font-size:14px;line-height:1.5;color:var(--ink2)}
+.rule li::before{content:"";position:absolute;left:2px;top:7px;width:9px;height:9px;border-radius:3px;background:var(--ink)}
+.donts{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.donts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.donts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dont{display:flex;flex-direction:column;gap:10px;align-items:center;padding:16px 12px;border-radius:18px;border:1px dashed var(--sand);background:var(--field);text-align:center}
+.dont .x{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:#A8674E;text-transform:uppercase}
+.dont p{font-size:13px;color:var(--ink2);line-height:1.35}
+.sizes{display:flex;align-items:flex-end;align-content:center;justify-content:center;gap:22px;flex-wrap:wrap;padding:20px}
+.sizes .sz{display:flex;flex-direction:column;align-items:center;gap:8px}
+
+/* ---------- color ---------- */
+.inkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px}
+.inkpanel{border-radius:var(--r-card);padding:18px 18px 8px;border:1px solid}
+.inkpanel h3{font-size:17px;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.inkrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid}
+.inkrow i{width:38px;height:38px;border-radius:11px;flex:none;box-shadow:inset 0 0 0 1px rgba(128,118,104,.25)}
+.inkrow .nm{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.inkrow .nm b{font-size:14.5px;font-weight:600}
+.inkrow .nm span{font-size:12.5px;opacity:.72}
+.hex{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;padding:6px 9px;border-radius:8px;border:1px solid transparent;white-space:nowrap}
+.hex:hover{border-color:currentColor}
+.swatches{display:grid;gap:12px}
+.sw8{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sw6{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:860px){.sw6{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.sw8{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.sw6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sw{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-sm);min-width:0}
+.sw .chip{position:relative;height:104px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 14px}
+.sw .chip .aa{font-weight:800;font-size:22px;letter-spacing:-.02em;line-height:1}
+.sw .chip .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.86}
+.sw .strong{height:22px;display:flex;align-items:center;padding:0 14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+.sw .darkb{height:22px;display:flex;align-items:center;padding:0 14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+.sw .meta{display:flex;flex-direction:column;gap:2px;padding:10px 12px 12px}
+.sw .meta b{font-size:14.5px;font-weight:700;letter-spacing:-.01em;padding-left:2px}
+.sw .meta .row{display:flex;flex-wrap:wrap;gap:2px 4px;margin-left:-7px}
+.palette-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.palette-head h3{font-size:18px;font-weight:700}
+.usedby{display:flex;gap:6px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;border:1px solid var(--line);background:var(--field);font-size:12px;font-weight:500;color:var(--ink2);white-space:nowrap}
+.pill i{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* ---------- planners ---------- */
+.planners{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:12px}
+.pl{display:flex;gap:14px;padding:16px;align-items:flex-start;border-radius:18px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-sm);min-width:0}
+.pl .bd{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.pl .bd b{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+.pl .bd .ln{font-size:13.5px;color:var(--ink2);line-height:1.4}
+.pl .bd .mt{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
+.pl .bd .mt .label{letter-spacing:.1em}
+
+/* ---------- type ---------- */
+.specimens{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:14px}
+.spec{padding:clamp(18px,3vw,26px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.spec .big{font-size:clamp(72px,11vw,112px);line-height:.9;letter-spacing:-.04em}
+.weights{display:flex;flex-direction:column;gap:6px}
+.weights div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:6px;font-size:19px;min-width:0}
+.weights div span:last-child{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--muted);white-space:nowrap}
+.scale{display:flex;flex-direction:column}
+.scale .row{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);gap:18px;align-items:baseline;padding:16px 0;border-top:1px solid var(--line)}
+.scale .row:first-child{border-top:0}
+.scale .row .k{display:flex;flex-direction:column;gap:3px}
+.scale .row .k b{font-size:13px;font-weight:700}
+.scale .row .k span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);line-height:1.5}
+.scale .sample{min-width:0;overflow-wrap:anywhere}
+@media (max-width:560px){.scale .row{grid-template-columns:1fr;gap:6px}}
+.specials{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.special{padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.special .s{font-size:24px;line-height:1.2;overflow-wrap:anywhere}
+
+/* ---------- interface ---------- */
+.shapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:12px}
+.shape{display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:16px;border-radius:18px;border:1px solid var(--line);background:var(--paper)}
+.shape i{display:block;width:64px;height:48px;background:var(--sand);border:1.5px solid var(--muted)}
+.shape b{font-size:14px;font-weight:700}
+.shape span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
+.play{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:18px;align-items:start}
+@media (max-width:820px){.play{grid-template-columns:1fr}}
+.picker{padding:18px;display:flex;flex-direction:column;gap:14px}
+.picker .grp{display:flex;flex-direction:column;gap:8px}
+.picker .dots{display:flex;flex-wrap:wrap;gap:8px}
+.dot{width:32px;height:32px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(128,118,104,.4)}
+.dot[aria-pressed="true"]{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink)}
+.picked{font-size:13.5px;color:var(--ink2)}
+.picked b{color:var(--ink)}
+/* the mini planner screen */
+.demo{--a:#B76E79;--a2:#9C5763;--on:#FFFFFF;--fill:color-mix(in srgb,var(--a) 12%,var(--paper));--tint:color-mix(in srgb,var(--a) 7%,var(--paper));--aline:color-mix(in srgb,var(--a) 32%,var(--line));--afg:var(--a2);padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:14px;border-radius:var(--r-card);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+:root[data-theme="dark"] .demo{--fill:color-mix(in srgb,var(--a) 20%,var(--paper));--tint:color-mix(in srgb,var(--a) 14%,var(--paper));--aline:color-mix(in srgb,var(--a) 42%,var(--line));--afg:color-mix(in srgb,var(--a) 82%,var(--ink))}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .demo{--fill:color-mix(in srgb,var(--a) 20%,var(--paper));--tint:color-mix(in srgb,var(--a) 14%,var(--paper));--aline:color-mix(in srgb,var(--a) 42%,var(--line));--afg:color-mix(in srgb,var(--a) 82%,var(--ink))}}
+.demo .dt{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.demo .dt .ey{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--afg)}
+.demo .dt h3{font-size:26px;font-weight:800;margin-top:4px}
+.demo .pct{text-align:right}
+.demo .pct b{display:block;font-size:26px;font-weight:800;color:var(--afg);line-height:1}
+.demo .bar{height:8px;border-radius:99px;background:var(--sand);overflow:hidden}
+.demo .bar i{display:block;height:100%;width:62%;border-radius:99px;background:var(--a)}
+.demo .task{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px}
+.demo .task:hover{background:var(--tint)}
+.demo .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--sand);flex:none;display:flex;align-items:center;justify-content:center}
+.demo .box.on{background:var(--a);border-color:var(--a)}
+.demo .box svg{stroke:var(--on)}
+.demo .task .tx{flex:1;min-width:0;font-size:15px;font-weight:500}
+.demo .task.done .tx{color:var(--muted);text-decoration:line-through}
+.demo .cat{font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:4px 9px;border-radius:99px;background:var(--field);color:var(--ink2);text-transform:uppercase}
+.demo .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.demo .pb{height:42px;padding:0 18px;border-radius:12px;background:var(--a);color:var(--on);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px}
+.demo .pb:hover{background:var(--a2)}
+.demo .gb{height:42px;padding:0 16px;border-radius:12px;border:1px solid var(--line);font-weight:600;font-size:13.5px;color:var(--ink2)}
+.demo .chipon{height:32px;padding:0 13px;border-radius:99px;background:var(--fill);border:1px solid var(--aline);color:var(--afg);font-family:var(--mono);font-size:10px;letter-spacing:.08em;display:inline-flex;align-items:center}
+.demo .st{height:30px;padding:0 12px;border-radius:99px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;display:inline-flex;align-items:center}
+.demo input{height:44px;width:100%;border-radius:10px;border:1px solid var(--line);background:var(--field);padding:0 13px;font:inherit;font-size:15px;color:var(--ink)}
+.demo input:focus{outline:none;border-color:var(--a);box-shadow:0 0 0 3px var(--tint)}
+.trules{padding:clamp(18px,3vw,24px)}
+.trules ol{margin:0;padding:0;list-style:none;counter-reset:r;display:flex;flex-direction:column}
+.trules li{counter-increment:r;display:flex;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5;color:var(--ink2)}
+.trules li:first-child{border-top:0}
+.trules li::before{content:counter(r,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:3px;flex:none;width:22px}
+.trules li b{color:var(--ink);font-weight:600}
+
+/* ---------- voice ---------- */
+.tags{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:10px}
+.tg{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;background:var(--paper);border:1px solid var(--line);min-width:0}
+.tg .q{font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.tg .w{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+.formula{padding:clamp(20px,3.5vw,30px);display:flex;flex-direction:column;gap:10px}
+.formula .f{font-size:clamp(26px,4.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.formula .f u{text-decoration:none;color:var(--muted);border-bottom:3px solid var(--sand)}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.qt{padding:18px;border-radius:18px;background:var(--field);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.qt p{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3}
+.words{overflow-x:auto;padding-top:16px}
+.words table{width:100%;border-collapse:collapse;min-width:520px}
+.words th{text-align:left;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 16px 10px}
+.words td{padding:13px 16px;border-top:1px solid var(--line);font-size:14.5px;vertical-align:top;line-height:1.45}
+.words td:first-child{font-weight:600}
+.words td:nth-child(2){color:#A8674E;text-decoration:line-through;text-decoration-color:rgba(168,103,78,.5)}
+.words td:nth-child(3){color:var(--ink2)}
+
+footer{margin-top:20px;padding-top:26px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+footer p{font-size:13px;color:var(--muted)}
+
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translate(-50%,16px);opacity:0;pointer-events:none;z-index:90;padding:11px 16px;border-radius:12px;background:var(--ink);color:var(--page);font-size:13.5px;font-weight:600;box-shadow:var(--shadow);transition:opacity .2s,transform .2s;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#hello" aria-label="WiredAndPlanned Brand Kit, back to top">
+    <span class="mk" data-mark="currentColor" data-crop="1" style="width:16.5px;height:17px"></span>
+    <span class="t"><b>WiredAndPlanned</b><span>BRAND KIT · V1</span></span>
+  </a>
+  <span class="spacer"></span>
+  <div class="seg" role="group" aria-label="Theme">
+    <button type="button" id="th-auto" data-th="auto" aria-pressed="true">Auto</button>
+    <button type="button" id="th-light" data-th="light" aria-pressed="false">Light</button>
+    <button type="button" id="th-dark" data-th="dark" aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<nav class="strip" aria-label="Sections" id="strip"></nav>
+
+<div class="shell">
+  <aside class="index" aria-label="Sections">
+    <div id="index"></div>
+    <p class="foot">EVERY DETAIL,<br>LOVINGLY PLANNED.</p>
+  </aside>
+
+  <main>
+    <div class="wrap">
+
+      <!-- HERO -->
+      <section class="hero" id="hello" data-nav="Hello" data-n="00">
+        <div class="hero-top">
+          <span class="mk" data-mark="currentColor" data-crop="1" style="width:clamp(52px,8vw,78px);aspect-ratio:16/16.5"></span>
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+            <span class="eyebrow">WiredAndPlanned · Brand kit · V1</span>
+            <h1>One family of calm, warm planners.</h1>
+          </div>
+        </div>
+        <p class="lead">This kit shows what makes a WiredAndPlanned planner look and sound like us: the Cairn mark, the ink, the color families, the type and the words. Everything in it is built from the 17 planners. Tap any color to copy it.</p>
+        <div class="family" id="family" aria-label="The 17 planner tiles"></div>
+        <p class="family-cap">The 17 planners, each with its own app icon.</p>
+      </section>
+
+      <!-- 01 BRAND -->
+      <section id="brand" data-nav="Brand" data-n="01">
+        <div class="head">
+          <span class="eyebrow">01 · The brand</span>
+          <h2>Who we are</h2>
+          <p>WiredAndPlanned makes digital planners that open in any browser and sit on the Home Screen like an app. They're calm, warm and easy to use, and most come alive with soft, moving artwork. Every one shares the same mark, ink and type.</p>
+        </div>
+        <div class="names">
+          <div class="card name">
+            <span class="label">The name</span>
+            <div class="show"><span style="font-size:28px;font-weight:800;letter-spacing:-.02em">WiredAndPlanned</span></div>
+            <p class="note">One word, with capital <b>W</b>, <b>A</b> and <b>P</b>. Use it in sentences, titles and sign-offs.</p>
+          </div>
+          <div class="card name">
+            <span class="label">The small wordmark</span>
+            <div class="show"><span class="mono" style="font-size:14px;font-weight:500;letter-spacing:.22em;color:var(--ink2)">WIREDANDPLANNED</span></div>
+            <p class="note">JetBrains Mono in capitals with wide spacing. It sits under a planner's name, never on its own as a logo.</p>
+          </div>
+          <div class="card name">
+            <span class="label">Page titles</span>
+            <div class="show"><span style="font-size:20px;font-weight:700;letter-spacing:-.01em">Wedding <span style="color:var(--muted)">·</span> WiredAndPlanned</span></div>
+            <p class="note">Short planner name, a middle dot, then the brand. Descriptions end with <b>“Part of the WiredAndPlanned family.”</b></p>
+          </div>
+        </div>
+        <div class="traits">
+          <div class="trait"><b>Calm</b><span>Quiet layouts, soft color, room to breathe.</span></div>
+          <div class="trait"><b>Warm</b><span>Cream paper, warm ink, kind words.</span></div>
+          <div class="trait"><b>Organized</b><span>Clear sections, numbered pages, honest numbers.</span></div>
+          <div class="trait"><b>Gentle</b><span>Encouragement, never pressure.</span></div>
+          <div class="trait"><b>Personal</b><span>Your names, your photos, your colors.</span></div>
+          <div class="trait"><b>Artistic</b><span>Soft drawings in the planner's own colors that move behind the content.</span></div>
+        </div>
+      </section>
+
+      <!-- 02 CAIRN -->
+      <section id="cairn" data-nav="The Cairn" data-n="02">
+        <div class="head">
+          <span class="eyebrow">02 · Logo</span>
+          <h2>The Cairn</h2>
+          <p>The Cairn on its own is the logo: three stones in one ink, on one paper, at every size. The tile around it is only for app icons.</p>
+        </div>
+        <div class="card" style="padding:clamp(20px,3.5vw,30px);display:flex;flex-direction:column;gap:12px">
+          <p class="quote">“Three measures of one material, set in balance — the oldest interface humanity has. A quiet stack left by someone who walked the path first: you are on the way; keep going.”</p>
+          <span class="quote-src">The master mark · Identity board 03</span>
+        </div>
+        <div class="marks">
+          <div class="card markbox">
+            <div class="stage"><span class="mk" data-mark="currentColor" data-crop="1" style="width:30%;max-width:84px;aspect-ratio:16/16.5;color:var(--ink)"></span></div>
+            <div><b style="font-size:15px">The mark</b><p class="note">Ink stones on paper. This is the logo.</p></div>
+          </div>
+          <div class="card markbox">
+            <div class="stage" style="background:#26211C;border-color:#26211C"><span class="mk" data-mark="#FCFAF5" data-crop="1" style="width:30%;max-width:84px;aspect-ratio:16/16.5"></span></div>
+            <div><b style="font-size:15px">Reversed</b><p class="note">Light stones on ink. The same artwork, either way round.</p></div>
+          </div>
+          <div class="card markbox">
+            <div class="stage" style="background:#9E5F69;border-color:#9E5F69"><span class="mk" data-mark="#FFFFFF" data-crop="1" style="width:30%;max-width:84px;aspect-ratio:16/16.5"></span></div>
+            <div><b style="font-size:15px">On a planner color</b><p class="note">White stones on the planner's color, like the strip on a Start Here PDF.</p></div>
+          </div>
+        </div>
+
+        <div class="card build-wrap">
+          <svg class="build" viewBox="-1.5 -1.5 39 28.6" role="img" aria-labelledby="build-t">
+            <title id="build-t">The Cairn on its 24 by 24 unit canvas, with the size of each stone</title>
+            <defs>
+              <pattern id="g1" width="1" height="1" patternUnits="userSpaceOnUse"><path class="gridl" d="M1 0H0V1" fill="none"/></pattern>
+              <pattern id="g6" width="6" height="6" patternUnits="userSpaceOnUse"><path class="gridm" d="M6 0H0V6" fill="none"/></pattern>
+            </defs>
+            <rect x="0" y="0" width="24" height="24" fill="url(#g1)"/>
+            <rect x="0" y="0" width="24" height="24" fill="url(#g6)"/>
+            <rect class="box" x="0" y="0" width="24" height="24"/>
+            <path class="box" d="M12 1.5V22.5"/>
+            <rect class="st" x="8.5" y="4.5" width="8" height="4.5" rx="2.25"/>
+            <rect class="st" x="5.85" y="10.5" width="11.3" height="4.5" rx="2.25"/>
+            <rect class="st" x="4" y="16.5" width="16" height="4.5" rx="2.25"/>
+            <path class="lead-l" d="M16.9 6.75H25.4M17.55 12.75H25.4M20.4 18.75H25.4" fill="none"/>
+            <text x="26" y="7.15">8 × 4.5</text>
+            <text x="26" y="13.15">11.3 × 4.5</text>
+            <text x="26" y="19.15">16 × 4.5</text>
+            <text class="dim" x="0" y="25.6">0</text>
+            <text class="dim" x="11.6" y="25.6">12</text>
+            <text class="dim" x="22.9" y="25.6">24</text>
+          </svg>
+          <div class="specs">
+            <div><span class="k">Canvas</span><span>24 × 24 units, one stone every 6 units. Rows start at 4.5, 10.5 and 16.5.</span></div>
+            <div><span class="k">Stones</span><span>Each 4.5 tall with a 1.5 gap, ends fully round.</span></div>
+            <div><span class="k">Widths</span><span>8, 11.3 and 16. Each stone is √2 wider than the one above, so top to base is 1 : 2.</span></div>
+            <div><span class="k">Balance</span><span>Top stone 0.5 right of center, middle stone 0.5 left, base centered (left edge at 4). 3 units of space under the base.</span></div>
+            <div><span class="k">Color</span><span>One ink on one paper, always.</span></div>
+            <div><span class="k">Copy</span><span class="btns"><button type="button" class="btn" id="copy-mark">Copy mark SVG</button><button type="button" class="btn ghost" id="copy-tile">Copy app icon SVG</button></span></div>
+          </div>
+        </div>
+
+        <div class="palette-head"><h3>Lockups</h3><span class="note">The mark and the name, always in one ink. No tile.</span></div>
+        <div class="lockups">
+          <div class="card lock">
+            <div class="stage"><div class="lk stack brandlk"><span class="mk" data-mark="currentColor" data-crop="1" style="width:46px;height:47.5px;color:var(--ink)"></span><span class="t"><b>WiredAndPlanned</b></span></div></div>
+            <div><b style="font-size:15px">Stacked · primary</b><p class="note">The mark above, the name centered beneath. For the shop icon, profile pictures, print and square images.</p></div>
+          </div>
+          <div class="card lock">
+            <div class="stage"><div class="lk brandlk"><span class="mk" data-mark="currentColor" data-crop="1" style="width:23.3px;height:24px;color:var(--ink)"></span><span class="t"><b>WiredAndPlanned</b></span></div></div>
+            <div><b style="font-size:15px">Horizontal · secondary</b><p class="note">The mark beside the name, the stones as tall as the letters. For website headers, PDF footers and tight spaces.</p></div>
+          </div>
+          <div class="card lock">
+            <div class="stage"><div class="lk"><span class="tile" data-tile="#B76E79" style="width:42px;height:42px"></span><span class="t"><b>Wedding Planner</b><span>WIREDANDPLANNED</span></span></div></div>
+            <div><b style="font-size:15px">Inside a planner</b><p class="note">Only inside the planners, where the tile is the app's own icon. Planner name in Hanken Grotesk Bold, the small wordmark beneath.</p></div>
+          </div>
+        </div>
+        <p class="note">The name in a lockup is Hanken Grotesk Medium (500), tracking −2%. Never set the mark and the name in two different inks.</p>
+
+        <div class="where">
+          <div class="card rule">
+            <b style="font-size:16px">The mark on its own</b>
+            <ul>
+              <li>PDFs and anything printed</li>
+              <li>Documents and emails</li>
+              <li>Listing images and banners</li>
+              <li>Website headers and page footers</li>
+              <li>Packaging and stickers</li>
+            </ul>
+          </div>
+          <div class="card rule">
+            <b style="font-size:16px">The tile, for app icons only</b>
+            <ul>
+              <li>Home Screen icons</li>
+              <li>Browser tab icons</li>
+              <li>Beside the planner name, inside each planner</li>
+              <li>Round profile pictures</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card apps" aria-label="The Cairn as an app icon">
+          <div class="app"><span class="tile" data-tile="#B76E79" style="width:72px;height:72px"></span><span class="label">Planner app</span></div>
+          <div class="app"><span class="tile" data-tile="brand" style="width:72px;height:72px"></span><span class="label">Brand app</span></div>
+          <div class="app"><span class="tile" data-tile="#FFFFFF" data-stone="#26211C" style="width:72px;height:72px;box-shadow:0 0 0 1px #E6E4DC"></span><span class="label">Brand app · light</span></div>
+          <div class="app"><span data-avatar="#26211C" style="display:block;width:72px;height:72px"></span><span class="label">Profile picture</span></div>
+          <div class="app"><span style="display:flex;align-items:flex-end;gap:10px"><span data-fav="#B76E79" style="display:block;width:16px;height:16px"></span><span data-fav="#B76E79" style="display:block;width:32px;height:32px"></span></span><span class="label">Tab icon</span></div>
+        </div>
+        <p class="note">An app icon is the planner's color with light stones, <b>#FCFAF5</b>. Corners are <b>24%</b> of the size and the mark fills <b>70% of the tile</b>, centered. The tab icon shows the stones at full size so they still read at 16 px. A planner's icon keeps its color when a buyer picks a different accent.</p>
+
+        <div class="sizeclear">
+          <div class="card" style="padding:clamp(18px,3vw,24px);display:flex;flex-direction:column;gap:16px">
+            <span class="label">Scale · one artwork</span>
+            <div class="scale-row">
+              <div class="sz"><span class="mk" data-mark="currentColor" style="width:128px;height:128px;color:var(--ink)"></span><span class="label">128</span></div>
+              <div class="sz"><span class="mk" data-mark="currentColor" style="width:64px;height:64px;color:var(--ink)"></span><span class="label">64</span></div>
+              <div class="sz"><span class="mk" data-mark="currentColor" style="width:32px;height:32px;color:var(--ink)"></span><span class="label">32</span></div>
+              <div class="sz"><span class="mk" data-mark="currentColor" style="width:16px;height:16px;color:var(--ink)"></span><span class="label">16</span></div>
+            </div>
+            <p class="note">The same drawing at every size. Smallest is <b>16 px</b>.</p>
+          </div>
+          <div class="card" style="padding:clamp(18px,3vw,24px);display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+            <span class="label">Clear space</span>
+            <span class="clearbox"><span class="mk" data-mark="currentColor" data-crop="1" style="width:58px;height:60px;color:var(--ink)"></span></span>
+            <p class="note">Keep empty space of <b>half the mark's height</b> on every side. That is about the length of the top stone.</p>
+          </div>
+        </div>
+
+        <div class="card motion">
+          <div class="stage"><span class="mk settle" id="settle" data-mark="currentColor" data-crop="1" style="width:46%;aspect-ratio:16/16.5;color:var(--ink)"></span></div>
+          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <span class="label">Motion</span>
+            <p class="note">The stones settle from the bottom up, one, two, three: <b>450 ms</b>, once, easing out, then still. A quiet confirmation, never a loop.</p>
+            <button type="button" class="btn ghost" id="play-settle">Play</button>
+          </div>
+        </div>
+
+        <div class="donts">
+          <div class="dont"><span class="mk" data-mark="currentColor" data-crop="1" style="width:70px;height:40px;color:var(--ink)"></span><span class="x">Don't</span><p>Stretch or squash it.</p></div>
+          <div class="dont"><span class="mk" data-mark="currentColor" data-crop="1" style="width:40px;height:41px;color:var(--ink);transform:rotate(-14deg)"></span><span class="x">Don't</span><p>Rotate it.</p></div>
+          <div class="dont"><span class="mk" data-mark="two" data-crop="1" style="width:40px;height:41px"></span><span class="x">Don't</span><p>Use two inks in one logo.</p></div>
+          <div class="dont"><span class="mk" data-mark="four" data-crop="1" style="width:40px;height:56px;color:var(--ink)"></span><span class="x">Don't</span><p>Add a fourth stone.</p></div>
+          <div class="dont"><span class="mk" data-mark="currentColor" data-crop="1" style="width:40px;height:41px;color:var(--ink);filter:drop-shadow(0 0 0 #F0A32E) drop-shadow(2px 3px 2px rgba(0,0,0,.5))"></span><span class="x">Don't</span><p>Add outlines, textures or effects.</p></div>
+          <div class="dont"><span class="tile" data-tile="#4E7BAE" style="width:40px;height:40px"></span><span class="x">Don't</span><p>Put the app tile on pages or print. Use the mark.</p></div>
+        </div>
+      </section>
+
+      <!-- 03 INK -->
+      <section id="ink" data-nav="Ink" data-n="03">
+        <div class="head">
+          <span class="eyebrow">03 · Color · The brand's own</span>
+          <h2>Ink and paper</h2>
+          <p>The brand's own colors: warm ink on light, warm paper. They start from the Minimalist planner, with lighter paper in light mode and lighter text in dark mode. Use them for the brand itself, for all text, and for anything that is not one single planner.</p>
+        </div>
+        <div class="inkgrid" id="inkgrid"></div>
+        <p class="note">The brand accent is Ink itself: <b>#26211C</b>, pressed <b>#000000</b> on light; <b>#F7F3EC</b>, pressed <b>#FFFFFF</b> on dark.</p>
+      </section>
+
+      <!-- 04 MONO -->
+      <section id="mono" data-nav="Mono" data-n="04">
+        <div class="head">
+          <span class="eyebrow">04 · Color · Black and white</span>
+          <h2>Mono</h2>
+          <p>The Minimalist planner's own colors: warm ink on linen, with Ink as the accent. The brand's colors start from these.</p>
+        </div>
+        <div class="palette-head"><h3>Ink on linen</h3><div class="usedby" data-used="Minimalist Planner"></div></div>
+        <div class="inkgrid" id="monogrid"></div>
+        <p class="note">The accent is Ink itself: <b>#26211C</b>, pressed <b>#000000</b> on light; <b>#F2EDE4</b>, pressed <b>#FFFFFF</b> on dark. The Minimalist also offers Brick, Blue and Green from Warm 6.</p>
+      </section>
+
+      <!-- 04 MULTI 8 -->
+      <section id="multi" data-nav="Multi 8" data-n="05">
+        <div class="head">
+          <span class="eyebrow">05 · Color · Bright</span>
+          <h2>Multi 8</h2>
+          <p>Bright and cheerful, made for color-coding. Each color has a base for fills and dots, and a strong shade for pressed buttons and colored text.</p>
+        </div>
+        <div class="palette-head"><h3>Eight colors</h3><div class="usedby" data-used="Everyday Planner,Student Planner,Teacher Planner,Home Planner"></div></div>
+        <div class="swatches sw8" id="sw-multi"></div>
+      </section>
+
+      <!-- 05 WARM 6 -->
+      <section id="warm" data-nav="Warm 6" data-n="06">
+        <div class="head">
+          <span class="eyebrow">06 · Color · Earthy</span>
+          <h2>Warm 6</h2>
+          <p>Earthy and grounded, for tracking money, habits, food and focus.</p>
+        </div>
+        <div class="palette-head"><h3>Six colors</h3><div class="usedby" data-used="Finance Tracker,Habit Tracker,Meal Planner,ADHD Planner,Fitness Planner"></div></div>
+        <div class="swatches sw6" id="sw-warm"></div>
+        <p class="note">ADHD uses a deeper blue, <b>#4E7BAE</b>. Fitness adds Ember <b>#FA5A2A</b> for its sporty screens.</p>
+      </section>
+
+      <!-- 06 SOFT 6 -->
+      <section id="soft" data-nav="Soft 6" data-n="07">
+        <div class="head">
+          <span class="eyebrow">07 · Color · Dusty</span>
+          <h2>Soft 6</h2>
+          <p>Dusty and gentle, for life moments and wellness. It comes in two versions with the same feeling.</p>
+        </div>
+        <div class="palette-head"><h3>Life-moment</h3><div class="usedby" data-used="Wedding Planner,Travel Planner"></div></div>
+        <div class="swatches sw6" id="sw-soft"></div>
+        <p class="note">Life-moment colors have their own lighter shade for dark mode, shown in the bottom strip.</p>
+        <div class="palette-head" style="margin-top:10px"><h3>Wellness</h3><div class="usedby" data-used="Gratitude Journal,Pregnancy Journal,Stillpoint,Weekly Planner,Willow"></div></div>
+        <div class="swatches sw6" id="sw-well"></div>
+        <p class="note">Shown as in Gratitude. Pregnancy, Stillpoint, Weekly and Willow use close versions with their own names, such as Lilac, Mist, Sky and Plum.</p>
+      </section>
+
+      <!-- 07 PLANNERS -->
+      <section id="planners" data-nav="The family" data-n="08">
+        <div class="head">
+          <span class="eyebrow">08 · The family</span>
+          <h2>Seventeen planners, one family</h2>
+          <p>Every planner has one signature color. It fills the planner's app icon and the strip on its Start Here PDF.</p>
+        </div>
+        <div class="planners" id="planners-grid"></div>
+      </section>
+
+      <!-- 08 TYPE -->
+      <section id="type" data-nav="Type" data-n="09">
+        <div class="head">
+          <span class="eyebrow">09 · Typography</span>
+          <h2>Type</h2>
+          <p>Two typefaces carry the brand. Hanken Grotesk speaks, JetBrains Mono labels. Both are free on Google Fonts.</p>
+        </div>
+        <div class="specimens">
+          <div class="card spec">
+            <span class="label">Hanken Grotesk · Headings and text</span>
+            <div class="big" style="font-weight:800">Aa</div>
+            <div class="weights">
+              <div><span style="font-weight:400">The road to the day</span><span>400 REGULAR</span></div>
+              <div><span style="font-weight:500">The road to the day</span><span>500 MEDIUM</span></div>
+              <div><span style="font-weight:600">The road to the day</span><span>600 SEMIBOLD</span></div>
+              <div><span style="font-weight:700">The road to the day</span><span>700 BOLD</span></div>
+              <div><span style="font-weight:800;letter-spacing:-.02em">The road to the day</span><span>800 EXTRABOLD</span></div>
+            </div>
+          </div>
+          <div class="card spec">
+            <span class="label">JetBrains Mono · Labels and numbers</span>
+            <div class="big mono" style="font-weight:500;letter-spacing:-.06em">Aa</div>
+            <div class="weights">
+              <div><span class="mono" style="font-size:12px;letter-spacing:.22em;color:var(--muted)">WIREDANDPLANNED</span><span>WORDMARK</span></div>
+              <div><span class="mono" style="font-size:12px;letter-spacing:.24em">02 · CHECKLIST</span><span>EYEBROW</span></div>
+              <div><span class="mono" style="font-size:12px;letter-spacing:.14em;color:var(--muted)">DUE MAR 14</span><span>LABEL</span></div>
+              <div><span class="mono" style="font-size:18px;font-weight:600">$45,000 · 12:30</span><span>NUMBERS</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:clamp(16px,3vw,24px)">
+          <div class="scale" id="scale">
+            <div class="row"><div class="k"><b>Display</b><span>Hanken 800 · 64 px<br>line 0.98 · −2%</span></div><div class="sample" style="font-size:clamp(34px,6vw,64px);font-weight:800;line-height:.98;letter-spacing:-.02em">Ava &amp; Julian</div></div>
+            <div class="row"><div class="k"><b>Page title</b><span>Hanken 800 · 42 px<br>−2%</span></div><div class="sample" style="font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.05">The road to the day</div></div>
+            <div class="row"><div class="k"><b>Section</b><span>Hanken 700 · 19 px</span></div><div class="sample" style="font-size:19px;font-weight:700">Up next</div></div>
+            <div class="row"><div class="k"><b>Body</b><span>Hanken 400–500 · 15 px<br>line 1.5</span></div><div class="sample" style="font-size:15px;line-height:1.5;color:var(--ink2);max-width:60ch">Tick the box when a task is done. Tap a task to edit it or give it a date.</div></div>
+            <div class="row"><div class="k"><b>Eyebrow</b><span>Mono 500 · 11 px<br>capitals · +24%</span></div><div class="sample mono" style="font-size:11px;letter-spacing:.24em">03 · BUDGET TRACKER</div></div>
+            <div class="row"><div class="k"><b>Label</b><span>Mono 500 · 10 px<br>capitals · +14%</span></div><div class="sample mono" style="font-size:10px;letter-spacing:.14em;color:var(--muted)">TOTAL BUDGET</div></div>
+          </div>
+        </div>
+        <div class="palette-head"><h3>Special voices</h3><span class="note">Used in one or two planners only.</span></div>
+        <div class="specials">
+          <div class="card special"><span class="label">Newsreader · Weekly, Willow</span><span class="s" style="font-family:var(--serif);font-style:italic">Name one thing, however small.</span><p class="note">Italic serif for reflective words and quotes.</p></div>
+          <div class="card special"><span class="label">Archivo · Fitness</span><span class="s" style="font-family:'Archivo',var(--sans);font-weight:800;letter-spacing:-.01em">PLAN THE WORK.</span><p class="note">Bold display for the sporty planner.</p></div>
+          <div class="card special"><span class="label">IBM Plex Mono · Meal</span><span class="s" style="font-family:'IBM Plex Mono',var(--mono);font-weight:600;font-size:17px;letter-spacing:.14em">LOVE THE TABLE.</span><p class="note">Meal's labels use Plex Mono in place of JetBrains Mono.</p></div>
+        </div>
+      </section>
+
+      <!-- 09 INTERFACE -->
+      <section id="ui" data-nav="Interface" data-n="10">
+        <div class="head">
+          <span class="eyebrow">10 · Interface</span>
+          <h2>Shapes and color in use</h2>
+          <p>Soft corners, paper cards and one accent at a time. Pick a color to see how a planner screen uses it.</p>
+        </div>
+        <div class="shapes">
+          <div class="shape"><i style="width:48px;border-radius:24%"></i><b>App tile</b><span>24% of size</span></div>
+          <div class="shape"><i style="border-radius:16px"></i><b>Card</b><span>20–24 px</span></div>
+          <div class="shape"><i style="border-radius:12px;height:32px"></i><b>Button</b><span>12 px · 44 px tall</span></div>
+          <div class="shape"><i style="border-radius:10px;height:32px"></i><b>Field</b><span>10 px</span></div>
+          <div class="shape"><i style="border-radius:999px;height:28px"></i><b>Pill</b><span>fully round</span></div>
+        </div>
+        <div class="play">
+          <div class="card picker">
+            <span class="label">Pick an accent</span>
+            <div id="picker"></div>
+            <p class="picked" id="picked"></p>
+          </div>
+          <div class="demo" id="demo" aria-label="Example planner screen">
+            <div class="dt">
+              <div><div class="ey">02 · CHECKLIST</div><h3>The road to the day</h3></div>
+              <div class="pct"><b>62%</b><span class="label">5/8 DONE</span></div>
+            </div>
+            <div class="bar"><i></i></div>
+            <div>
+              <div class="task done"><span class="box on"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span><span class="tx">Book the venue</span><em class="cat">Venue</em></div>
+              <div class="task"><span class="box"></span><span class="tx">Send the invitations</span><em class="cat">Guests</em></div>
+              <div class="task"><span class="box"></span><span class="tx">Choose the cake</span><em class="cat">Vendors</em></div>
+            </div>
+            <div class="row">
+              <span class="chipon">SELECTED</span>
+              <span class="st" style="background:rgba(108,154,94,.16);color:#5E8C4E">DONE</span>
+              <span class="st" style="background:rgba(213,150,69,.16);color:#B9803A">PENDING</span>
+            </div>
+            <label for="demo-input" class="label" style="margin-bottom:-6px">New task</label>
+            <input id="demo-input" placeholder="What needs doing?">
+            <div class="row"><button type="button" class="pb">+ Add task</button><button type="button" class="gb">Cancel</button></div>
+          </div>
+        </div>
+        <div class="card trules">
+          <ol>
+            <li><span>Every accent is stored as <b>two colors</b>: a base and a strong shade.</span></li>
+            <li><span>Soft fills, tints and lines are mixed from the base: <b>12%, 7% and 32%</b> on light, <b>20%, 14% and 42%</b> on dark.</span></li>
+            <li><span>Every planner has <b>Light, Dark and System</b> themes, built from its own warm neutrals, like the ones in Mono.</span></li>
+            <li><span>The <b>app icon keeps the planner color</b> and never follows the accent the buyer picks.</span></li>
+            <li><span>Text on a color is white or Paper. Light colors like Amber, Honey and Champagne take <b>Ink</b> instead.</span></li>
+            <li><span><b>Done</b> is Green and <b>pending</b> is Amber. Alerts use a soft brick red, like <span class="mono">#A8674E</span> in Wedding.</span></li>
+            <li><span>Shadows are soft and warm: <span class="mono">0 10px 30px</span> at 9% warm brown. Icons are thin lines, 1.75–2 px, with round ends.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 10 VOICE -->
+      <section id="voice" data-nav="Voice" data-n="11">
+        <div class="head">
+          <span class="eyebrow">11 · Words</span>
+          <h2>How we sound</h2>
+          <p>Short, kind and clear. We talk to the buyer as “you”, celebrate small wins and never push.</p>
+        </div>
+        <div class="card formula">
+          <span class="label">The tagline pattern</span>
+          <div class="f">Plan the <u>trip</u>. Keep the <u>memory</u>.</div>
+          <p class="note">Two short sentences: what you plan, then what you get to keep, love or own.</p>
+        </div>
+        <div class="tags" id="tags"></div>
+        <div class="palette-head"><h3>Gentle lines</h3><span class="note">Quiet encouragement inside the planners.</span></div>
+        <div class="quotes">
+          <div class="qt"><p>Small stones, stacked daily.</p><span class="label">Habit Tracker</span></div>
+          <div class="qt"><p>One thing at a time.</p><span class="label">ADHD Planner</span></div>
+          <div class="qt"><p>Small things count most.</p><span class="label">Gratitude Journal</span></div>
+          <div class="qt"><p>One breath at a time.</p><span class="label">Stillpoint</span></div>
+          <div class="qt"><p>Do less, but beautifully.</p><span class="label">Minimalist Planner</span></div>
+          <div class="qt"><p>Every detail, lovingly planned.</p><span class="label">Wedding Planner</span></div>
+        </div>
+        <div class="card words">
+          <table>
+            <thead><tr><th>Say</th><th>Not</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>Add to Home Screen</td><td>Install, download the app</td><td>Nothing is installed. The planner opens from the Home Screen like an app.</td></tr>
+              <tr><td>Order number</td><td>License key</td><td>Buyers open their planner with the order number from their purchase.</td></tr>
+              <tr><td>Where you bought your planner</td><td>Etsy, Gumroad</td><td>No shop or marketplace names on planner pages or PDFs.</td></tr>
+              <tr><td>Your entries stay on this device</td><td>Synced, saved in the cloud</td><td>Planners save in the browser. Export and Import move them.</td></tr>
+              <tr><td>Part of the WiredAndPlanned family.</td><td>Product of, powered by</td><td>Our sign-off for descriptions and listings.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <footer>
+          <span class="mk" data-mark="currentColor" data-crop="1" style="width:17.5px;height:18px;color:var(--ink)"></span>
+          <p>WiredAndPlanned Brand Kit · V1 · Built from the 17 planners, October 2026.</p>
+        </footer>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+  var STONE = '#FCFAF5', INK = '#26211C';
+  var STONES = '<rect x="8.5" y="4.5" width="8" height="4.5" rx="2.25"/><rect x="5.85" y="10.5" width="11.3" height="4.5" rx="2.25"/><rect x="4" y="16.5" width="16" height="4.5" rx="2.25"/>';
+
+  // ---------- data (from the planners; the brand's own colors start from the Minimalist) ----------
+  var INK_LIGHT = [
+    ['Cream', '#FAF5EC', 'Page background'], ['Paper', '#FFFDF9', 'Cards'], ['Field', '#FCF9F3', 'Buttons and inputs'],
+    ['Line', '#F3EDE2', 'Borders and dividers'], ['Sand', '#EBE1D1', 'Empty bars and checkboxes'], ['Muted', '#8F8574', 'Labels and hints'],
+    ['Ink 2', '#6A6152', 'Secondary text'], ['Ink', '#26211C', 'Text and the brand tile']
+  ];
+  var INK_DARK = [
+    ['Night', '#1E1C18', 'Page background'], ['Paper', '#26231E', 'Cards'], ['Field', '#242019', 'Buttons and inputs'],
+    ['Line', '#39332B', 'Borders and dividers'], ['Sand', '#3B352C', 'Empty bars and checkboxes'], ['Muted', '#ABA291', 'Labels and hints'],
+    ['Ink 2', '#CCC4B3', 'Secondary text'], ['Ink', '#F7F3EC', 'Text and the brand tile']
+  ];
+  var MONO_LIGHT = [
+    ['Linen', '#F3EDE2', 'Page background'], ['Paper', '#FCFAF5', 'Cards and sheets'], ['Field', '#FAF5EC', 'Buttons, chips and inputs'],
+    ['Line', '#EBE1D1', 'Borders and dividers'], ['Sand', '#DED3C0', 'Checkboxes and dashed lines'], ['Muted', '#8F8574', 'Labels and hints'],
+    ['Ink 2', '#6A6152', 'Secondary text'], ['Ink', '#26211C', 'Text and the accent']
+  ];
+  var MONO_DARK = [
+    ['Night', '#1E1C18', 'Page background'], ['Paper', '#26231E', 'Cards and sheets'], ['Field', '#242019', 'Buttons, chips and inputs'],
+    ['Line', '#39332B', 'Borders and dividers'], ['Sand', '#3B352C', 'Checkboxes and dashed lines'], ['Muted', '#9C9282', 'Labels and hints'],
+    ['Ink 2', '#B9AF9D', 'Secondary text'], ['Ink', '#F2EDE4', 'Text and the accent']
+  ];
+  var MULTI = [['Coral','#E8563A','#BE4730'],['Amber','#F0A32E','#C58626'],['Green','#5CB85B','#4B974B'],['Teal','#26B0A3','#1F9086'],
+               ['Blue','#4A93E8','#3D79BE'],['Purple','#9B6BE0','#7F58B8'],['Pink','#EA6FA8','#C05B8A'],['Clay','#BE6D4E','#9C5940']];
+  var WARM = [['Coral','#C85A3E','#AA4D35'],['Amber','#D59645','#B5803B'],['Brick','#A85637','#8F492F'],
+              ['Green','#6C9A5E','#5C8350'],['Blue','#5E8EBF','#5079A2'],['Purple','#856CC1','#715CA4']];
+  var SOFT = [['Dusty Rose','#B76E79','#9C5763','#DDA0AB'],['Champagne','#BE9A54','#A0803E','#E0C57F'],['Sage','#849A6C','#697E53','#AEC58C'],
+              ['Mauve','#9A76A6','#7F5C8B','#C9A2D4'],['Dusty Blue','#6E8FB2','#567299','#9BBBDB'],['Terracotta','#C2755A','#A55C43','#DE9B7E']];
+  var WELL = [['Rose','#C46B76','#A8515D'],['Sage','#7F9A72','#657E58'],['Lavender','#9585B2','#7A6A97'],
+              ['Honey','#C08A45','#9C6C31'],['Clay','#C07B5E','#A16046'],['Blue','#6E93B3','#567A9A']];
+  var PLANNERS = [
+    ['ADHD Planner','#4E7BAE','Warm 6','Quiet the noise. One thing at a time.'],
+    ['Everyday Planner','#E8563A','Multi 8','Plan the day. Live the everyday.'],
+    ['Finance Tracker','#6C9A5E','Warm 6','Plan the money. Keep the difference.'],
+    ['Fitness Planner','#C85A3E','Warm 6','Plan the work. Work the plan.'],
+    ['Gratitude Journal','#C46B76','Soft 6 · Wellness','Small things count most.'],
+    ['Habit Tracker','#C85A3E','Warm 6','Small stones, stacked daily.'],
+    ['Home Planner','#4A93E8','Multi 8','Plan the home. Love the calm.'],
+    ['Meal Planner','#C85A3E','Warm 6','Plan the meals. Love the table.'],
+    ['Minimalist Planner','#2B2825','Mono','Do less, but beautifully.'],
+    ['Pregnancy Journal','#B86F7C','Soft 6 · Wellness','A keepsake for the whole journey.'],
+    ['Stillpoint','#6B8A5C','Soft 6 · Wellness','One breath at a time.'],
+    ['Student Planner','#9B6BE0','Multi 8','Plan the term. Own the day.'],
+    ['Teacher Planner','#26B0A3','Multi 8','Plan the week. Teach the room.'],
+    ['Travel Planner','#B76E79','Soft 6 · Life-moment','Plan the trip. Keep the memory.'],
+    ['Wedding Planner','#B76E79','Soft 6 · Life-moment','Every detail, lovingly planned.'],
+    ['Weekly Planner','#BE6D4E','Soft 6 · Wellness','Plan the day. Keep the calm.'],
+    ['Willow','#BE747A','Soft 6 · Wellness','Small, kind things still count.']
+  ];
+  var TAGS = [
+    ['Plan the day.','Live the everyday.','Everyday'], ['Plan the money.','Keep the difference.','Finance'],
+    ['Plan the work.','Work the plan.','Fitness'], ['Plan the home.','Love the calm.','Home'],
+    ['Plan the meals.','Love the table.','Meal'], ['Plan the term.','Own the day.','Student'],
+    ['Plan the week.','Teach the room.','Teacher'], ['Plan the trip.','Keep the memory.','Travel'],
+    ['Plan the day.','Keep the calm.','Weekly']
+  ];
+  var colorOf = {}; PLANNERS.forEach(function(p){ colorOf[p[0]] = p[1]; });
+
+  // ---------- helpers ----------
+  function lum(hex){
+    var h = hex.replace('#',''); var r = parseInt(h.substr(0,2),16)/255, g = parseInt(h.substr(2,2),16)/255, b = parseInt(h.substr(4,2),16)/255;
+    function f(c){ return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+    return 0.2126*f(r) + 0.7152*f(g) + 0.0722*f(b);
+  }
+  function contrast(a,b){ var x = lum(a), y = lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+  function onColor(hex){ return contrast(hex, '#FFFFFF') >= contrast(hex, INK) ? '#FFFFFF' : INK; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function tileSVG(fill, stone){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true" preserveAspectRatio="none"><rect width="24" height="24" fill="' + fill + '"/>' +
+           '<g transform="translate(3.6 3.6) scale(.7)" fill="' + (stone || STONE) + '">' + STONES + '</g></svg>';
+  }
+  function hexBtn(hex, style){ return '<button type="button" class="hex" data-copy="' + hex + '" title="Copy ' + hex + '"' + (style ? ' style="' + style + '"' : '') + '>' + hex + '</button>'; }
+
+  // tiles anywhere on the page
+  function paintTiles(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (document.documentElement.getAttribute('data-theme') !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.querySelectorAll('[data-tile]').forEach(function(el){
+      var t = el.getAttribute('data-tile');
+      var fill = t === 'brand' ? (dark ? '#F7F3EC' : INK) : t;
+      var stone = el.getAttribute('data-stone') || (t === 'brand' ? (dark ? INK : STONE) : STONE);
+      el.innerHTML = tileSVG(fill, stone);
+      el.style.overflow = 'hidden';
+      if (!el.getAttribute('role')) el.setAttribute('role','img');
+      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', 'Cairn tile');
+    });
+    document.querySelectorAll('[data-mark]').forEach(function(el){
+      var c = el.getAttribute('data-mark'), vb = el.hasAttribute('data-crop') ? '4 4.5 16 16.5' : '0 0 24 24';
+      var body = '<g fill="' + c + '">' + STONES + '</g>';
+      if (c === 'two') body = '<g fill="#26211C"><rect x="8.5" y="4.5" width="8" height="4.5" rx="2.25"/><rect x="4" y="16.5" width="16" height="4.5" rx="2.25"/></g><rect x="5.85" y="10.5" width="11.3" height="4.5" rx="2.25" fill="#E8563A"/>';
+      if (c === 'four') { vb = '4 -1.5 16 22.5'; body = '<g fill="currentColor"><rect x="10" y="-1.5" width="5.3" height="4.5" rx="2.25"/>' + STONES + '</g>'; }
+      el.innerHTML = '<svg viewBox="' + vb + '" aria-hidden="true" preserveAspectRatio="none">' + body + '</svg>';
+    });
+    document.querySelectorAll('[data-avatar]').forEach(function(el){
+      el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" style="display:block;width:100%;height:100%"><circle cx="12" cy="12" r="12" fill="' + el.getAttribute('data-avatar') + '"/>' +
+        '<g transform="translate(4.8 4.8) scale(.6)" fill="' + STONE + '">' + STONES + '</g></svg>';
+    });
+    document.querySelectorAll('[data-fav]').forEach(function(el){
+      el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" style="display:block;width:100%;height:100%"><rect width="24" height="24" rx="5.78" fill="' + el.getAttribute('data-fav') + '"/>' +
+        '<g fill="' + STONE + '">' + STONES + '</g></svg>';
+    });
+  }
+
+  // ---------- render ----------
+  // family row
+  var fam = document.getElementById('family');
+  fam.innerHTML = PLANNERS.map(function(p){
+    return '<span class="ft" title="' + esc(p[0]) + ' · ' + p[1] + '"><span class="tile" data-tile="' + p[1] + '" style="width:44px;height:44px" aria-label="' + esc(p[0]) + '"></span></span>';
+  }).join('');
+
+  // ink panels
+  function inkPanel(title, rows, bg, fg, line){
+    return '<div class="inkpanel" style="background:' + bg + ';color:' + fg + ';border-color:' + line + '">' +
+      '<h3><span>' + title + '</span><span class="mono" style="font-size:10px;letter-spacing:.14em;opacity:.7">' + (title === 'Light' ? 'LIGHT THEME' : 'DARK THEME') + '</span></h3>' +
+      rows.map(function(r){
+        return '<div class="inkrow" style="border-color:' + line + '"><i style="background:' + r[1] + '"></i>' +
+          '<span class="nm"><b>' + r[0] + '</b><span>' + r[2] + '</span></span>' + hexBtn(r[1], 'color:' + fg) + '</div>';
+      }).join('') + '</div>';
+  }
+  document.getElementById('inkgrid').innerHTML =
+    inkPanel('Light', INK_LIGHT, '#FFFDF9', '#26211C', '#F3EDE2') + inkPanel('Dark', INK_DARK, '#26231E', '#F7F3EC', '#39332B');
+  document.getElementById('monogrid').innerHTML =
+    inkPanel('Light', MONO_LIGHT, '#FCFAF5', '#26211C', '#EBE1D1') + inkPanel('Dark', MONO_DARK, '#26231E', '#F2EDE4', '#39332B');
+
+  // swatches
+  function swatch(c, darkBase){
+    var on = onColor(c[1]), onS = onColor(c[2]);
+    var html = '<div class="sw"><div class="chip" style="background:' + c[1] + ';color:' + on + '"><span class="aa">Aa</span><span class="tag">' + esc(c[0]) + '</span></div>' +
+      '<div class="strong" style="background:' + c[2] + ';color:' + onS + '">Strong</div>';
+    if (darkBase) html += '<div class="darkb" style="background:' + darkBase + ';color:' + onColor(darkBase) + '">Dark mode</div>';
+    html += '<div class="meta"><b>' + esc(c[0]) + '</b><div class="row">' + hexBtn(c[1]) + hexBtn(c[2], 'color:var(--muted)') +
+      (darkBase ? hexBtn(darkBase, 'color:var(--muted)') : '') + '</div></div></div>';
+    return html;
+  }
+  document.getElementById('sw-multi').innerHTML = MULTI.map(function(c){ return swatch(c); }).join('');
+  document.getElementById('sw-warm').innerHTML = WARM.map(function(c){ return swatch(c); }).join('');
+  document.getElementById('sw-soft').innerHTML = SOFT.map(function(c){ return swatch(c, c[3]); }).join('');
+  document.getElementById('sw-well').innerHTML = WELL.map(function(c){ return swatch(c); }).join('');
+
+  // used-by pills
+  document.querySelectorAll('[data-used]').forEach(function(el){
+    el.innerHTML = el.getAttribute('data-used').split(',').map(function(n){
+      return '<span class="pill"><i style="background:' + (colorOf[n] || INK) + '"></i>' + esc(n.replace(/ (Planner|Tracker|Journal)$/,'')) + '</span>';
+    }).join('');
+  });
+
+  // planners
+  document.getElementById('planners-grid').innerHTML = PLANNERS.map(function(p){
+    return '<div class="pl"><span class="tile" data-tile="' + p[1] + '" style="width:48px;height:48px"></span><div class="bd"><b>' + esc(p[0]) + '</b>' +
+      '<span class="ln">' + esc(p[3]) + '</span><span class="mt"><span class="label">' + esc(p[2]) + '</span>' + hexBtn(p[1], 'color:var(--ink2)') + '</span></div></div>';
+  }).join('');
+
+  // taglines
+  document.getElementById('tags').innerHTML = TAGS.map(function(t){
+    return '<div class="tg"><span class="tile" data-tile="' + (colorOf[t[2] + ' Planner'] || colorOf[t[2] + ' Tracker'] || INK) + '" style="width:30px;height:30px"></span><div style="min-width:0"><div class="q">' + esc(t[0]) + ' ' + esc(t[1]) + '</div><div class="w">' + esc(t[2]) + '</div></div></div>';
+  }).join('');
+
+  // accent picker
+  var GROUPS = [['Multi 8', MULTI], ['Warm 6', WARM], ['Soft 6 · Life-moment', SOFT], ['Soft 6 · Wellness', WELL], ['Mono', [['Ink','#26211C','#000000']]]];
+  var picker = document.getElementById('picker'), demo = document.getElementById('demo'), picked = document.getElementById('picked');
+  picker.innerHTML = GROUPS.map(function(g, gi){
+    return '<div class="grp"><span class="label" style="letter-spacing:.1em">' + esc(g[0]) + '</span><div class="dots">' +
+      g[1].map(function(c, ci){ return '<button type="button" class="dot" id="acc-' + gi + '-' + ci + '" data-g="' + gi + '" data-c="' + ci + '" aria-pressed="false" title="' + esc(c[0]) + ' ' + c[1] + '" aria-label="' + esc(g[0] + ' ' + c[0]) + '" style="background:' + c[1] + '"></button>'; }).join('') +
+      '</div></div>';
+  }).join('');
+  function pick(gi, ci){
+    var g = GROUPS[gi], c = g[1][ci];
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (document.documentElement.getAttribute('data-theme') !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    var base = c[1], strong = c[2];
+    if (g[0] === 'Mono' && dark) { base = '#F2EDE4'; strong = '#FFFFFF'; }
+    if (dark && c[3]) base = c[3];
+    demo.style.setProperty('--a', base);
+    demo.style.setProperty('--a2', strong);
+    demo.style.setProperty('--on', onColor(base));
+    picker.querySelectorAll('.dot').forEach(function(d){ d.setAttribute('aria-pressed', String(d.dataset.g == gi && d.dataset.c == ci)); });
+    picked.innerHTML = 'Showing <b>' + esc(c[0]) + '</b> from ' + esc(g[0]) + ': base <span class="mono">' + base + '</span>, strong <span class="mono">' + strong + '</span>.';
+    current = [gi, ci];
+  }
+  var current = [2, 0];
+  picker.addEventListener('click', function(e){
+    var b = e.target.closest('.dot'); if (!b) return;
+    pick(+b.dataset.g, +b.dataset.c);
+  });
+
+  // ---------- copy ----------
+  var toastEl = document.getElementById('toast'), tTimer = null;
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tTimer); tTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 1800); }
+  function copy(text, label){
+    function fallback(){
+      try {
+        var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly',''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); var ok = document.execCommand && document.execCommand('copy'); ta.remove();
+        toast(ok ? 'Copied ' + label : 'Select and copy: ' + text.slice(0, 40));
+      } catch (x) { toast('Select and copy: ' + text.slice(0, 40)); }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function(){ toast('Copied ' + label); }, fallback);
+      else fallback();
+    } catch (x) { fallback(); }
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    copy(b.getAttribute('data-copy'), b.getAttribute('data-copy'));
+  });
+  var MARK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="#26211C">' + STONES.replace(/"\/>/g, '"/>') + '</g></svg>';
+  var TILE_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5.78" fill="#26211C"/><g transform="translate(3.6 3.6) scale(.7)" fill="#FCFAF5">' + STONES + '</g></svg>';
+  document.getElementById('copy-mark').addEventListener('click', function(){ copy(MARK_SVG, 'the mark SVG'); });
+  document.getElementById('copy-tile').addEventListener('click', function(){ copy(TILE_SVG, 'the app icon SVG'); });
+  document.getElementById('play-settle').addEventListener('click', function(){
+    var m = document.getElementById('settle');
+    m.classList.remove('go'); void m.offsetWidth; m.classList.add('go');
+  });
+
+  // ---------- theme ----------
+  var root = document.documentElement;
+  function setTheme(t, save){
+    if (t === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', t);
+    ['auto','light','dark'].forEach(function(k){ document.getElementById('th-' + k).setAttribute('aria-pressed', String(k === t)); });
+    if (save) { try { localStorage.setItem('wap-kit-theme', t); } catch (x) {} }
+    paintTiles(); pick(current[0], current[1]);
+  }
+  document.querySelectorAll('[data-th]').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.getAttribute('data-th'), true); }); });
+  try { if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ paintTiles(); pick(current[0], current[1]); }); } catch (x) {}
+
+  // ---------- navigation ----------
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section[data-nav]'));
+  var navHTML = secs.map(function(s){ return '<a href="#' + s.id + '" data-to="' + s.id + '"><span>' + s.getAttribute('data-n') + '</span>' + esc(s.getAttribute('data-nav')) + '</a>'; }).join('');
+  document.getElementById('index').innerHTML = navHTML;
+  document.getElementById('strip').innerHTML = navHTML;
+  function mark(id){
+    document.querySelectorAll('a[data-to]').forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-to') === id); });
+    var on = document.querySelector('#strip a.on');
+    if (on && on.scrollIntoView) { var s = document.getElementById('strip'); s.scrollTo({ left: on.offsetLeft - 16, behavior: 'smooth' }); }
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) mark(en.target.id); });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    secs.forEach(function(s){ io.observe(s); });
+  }
+  mark('hello');
+
+  // ---------- start ----------
+  var saved = 'auto';
+  try { saved = localStorage.getItem('wap-kit-theme') || 'auto'; } catch (x) {}
+  setTheme(saved === 'light' || saved === 'dark' ? saved : 'auto', false);
+})();
+</script>
+</body>
+</html>
